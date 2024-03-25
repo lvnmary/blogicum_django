@@ -115,7 +115,9 @@ class ProfileView(PublishedPostsMixin, AnnotateCommentMixin, ListView):
                 .order_by('-pub_date')
             )
 
-        posts = self.get_published_posts(Post).filter(author__username=username)
+        posts = self.get_published_posts(Post).filter(
+            author__username=username
+        )
         return (
             self.annotate_comment_count(posts)
             .select_related('author', 'category', 'location')
