@@ -54,6 +54,9 @@ class Location(BaseModel):
         verbose_name = 'местоположение'
         verbose_name_plural = 'Местоположения'
 
+    def __str__(self):
+        return self.name
+
 
 class Post(BaseModel):
     title = models.CharField(
@@ -86,6 +89,11 @@ class Post(BaseModel):
         related_name='posts',
         verbose_name='Категория'
     )
+    image = models.ImageField(
+        upload_to='posts_images',
+        blank=True,
+        verbose_name='Изображение'
+    )
 
     class Meta:
         verbose_name = 'публикация'
@@ -93,3 +101,17 @@ class Post(BaseModel):
 
     def __str__(self):
         return self.title[:MAX_TITLE_LENGTH]
+
+
+class Comment(models.Model):
+    text = models.TextField(verbose_name='Текст комментария')
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('created_at',)
