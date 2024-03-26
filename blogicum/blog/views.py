@@ -5,11 +5,11 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView,
                                   ListView, UpdateView)
 
-from blog.forms import PostForm, CommentForm
-from blog.models import Category, Post, User
-from blog.mixins import (PostMixin, CommentMixin,
-                         PublishedPostsMixin, AnnotateCommentMixin)
 from blog.constants import POSTS_PER_PAGE
+from blog.forms import CommentForm, PostForm
+from blog.mixins import (AnnotateCommentMixin, CommentMixin,
+                         PostMixin, PublishedPostsMixin)
+from blog.models import Category, Post, User
 
 
 class PostView(PublishedPostsMixin, AnnotateCommentMixin, ListView):

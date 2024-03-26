@@ -1,9 +1,9 @@
-from django.utils import timezone
-from django.db.models import Count
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
+from django.utils import timezone
 
 from blog.forms import PostForm
 from blog.models import Comment, Post
